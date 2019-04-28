@@ -378,6 +378,8 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
+  ballPrefab: {fileID: 7838826389056004243, guid: 08eea42851f7fce4790512278876ee30,
+    type: 3}
 --- !u!114 &2045891094
 MonoBehaviour:
   m_ObjectHideFlags: 0
