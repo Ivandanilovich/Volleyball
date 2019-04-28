@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     [Range(0, 100)] public float jumpForce = 9;
     [Range(0, 100)] public float stepForce = 50;
@@ -18,11 +19,14 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        if (!isLocalPlayer) return;
         rBody = player.GetComponent<Rigidbody>();
     }
 
     void Update()
     {
+        if (!isLocalPlayer) return;
+
         if (Input.GetKeyDown(KeyCode.S) && rBody.transform.position.y <= minY)
             rBody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         if (Input.GetKey(KeyCode.A) && rBody.velocity.x > -maxVel)

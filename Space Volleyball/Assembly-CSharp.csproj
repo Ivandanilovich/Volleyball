@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\scripts\MyNetworkManager.cs" />
     <Compile Include="Assets\scripts\PlayerController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/ivand/Desktop/Space Volleyball/Volleyball/Space Volleyball/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
