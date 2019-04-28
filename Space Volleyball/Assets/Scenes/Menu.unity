@@ -322,7 +322,8 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 0
   m_OfflineScene: Menu
   m_OnlineScene: Game
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 7838826389056004243, guid: 08eea42851f7fce4790512278876ee30, type: 3}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -378,8 +379,6 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
-  ballPrefab: {fileID: 7838826389056004243, guid: 08eea42851f7fce4790512278876ee30,
-    type: 3}
 --- !u!114 &2045891094
 MonoBehaviour:
   m_ObjectHideFlags: 0
