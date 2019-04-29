@@ -12,6 +12,13 @@ public class PlayerController : NetworkBehaviour
     public GameObject player;
     private Rigidbody rBody;
 
+    [SyncVar] private int points;
+    public int Points
+    {
+        get { return points; }
+        set { if (value > 0 && value != points) points = value; }
+    }
+
     void FixedUpdate()
     {
 
