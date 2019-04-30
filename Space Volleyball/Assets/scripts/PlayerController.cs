@@ -12,7 +12,17 @@ public class PlayerController : NetworkBehaviour
     public GameObject player;
     private Rigidbody rBody;
 
-    [SyncVar] private int points;
+    private CameraScript cameraScript;
+    [SyncVar] private int playerID;
+
+    [SyncVar (hook ="OnPointsChange")] private int points;
+
+
+    private void OnPointsChange(int points)
+    {
+        cameraScript.UpdateUI(playerID, points);
+    }
+
     public int Points
     {
         get { return points; }
@@ -20,17 +30,6 @@ public class PlayerController : NetworkBehaviour
     }
 
     void FixedUpdate()
-    {
-
-    }
-
-    void Start()
-    {
-        if (!isLocalPlayer) return;
-        rBody = player.GetComponent<Rigidbody>();
-    }
-
-    void Update()
     {
         if (!isLocalPlayer) return;
 
@@ -40,6 +39,18 @@ public class PlayerController : NetworkBehaviour
             rBody.AddForce(new Vector3(-stepForce, 0, 0), ForceMode.Acceleration);
         if (Input.GetKey(KeyCode.D) && rBody.velocity.x < maxVel)
             rBody.AddForce(new Vector3(stepForce, 0, 0), ForceMode.Acceleration);
-        var vel = rBody.velocity;
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        rBody = player.GetComponent<Rigidbody>();
+        //GetComponent<SpriteRenderer>().color = Color.red;
+        base.OnStartLocalPlayer();
+        if (isServer) playerID = 1;
+    }
+
+    private void Awake()
+    {
+        cameraScript = Camera.main.GetComponent<CameraScript>();
     }
 }

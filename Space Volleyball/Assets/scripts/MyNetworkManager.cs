@@ -4,14 +4,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+
 public class MyNetworkManager : NetworkManager
 {
     public List<PlayerController> players = new List<PlayerController>();
     public static MyNetworkManager Instance { get; private set; }
 
+    public UnityEngine.UI.InputField addressInput;
+
     private short firstPlayerId = 0;
     private System.Random rand = new System.Random();
     private int[] scores = new int[] { 0, 0 };
+
+    public static string winner = "nobody";
+
+    //public void StartUpHost()
+    //{
+    //    //print(NetworkManager.toString());
+    //    NetworkManager.singleton.networkPort = 7777;
+    //    MyNetworkManager.singleton.StartHost();
+    //}
+
+    //public void JoinGame()
+    //{
+    //    MyNetworkManager.singleton.networkAddress = addressInput.text;
+    //    MyNetworkManager.singleton.networkPort = 7777;
+    //    MyNetworkManager.singleton.StartClient();
+    //}
 
     private void Awake()
     {
@@ -24,6 +43,13 @@ public class MyNetworkManager : NetworkManager
         ball.GetComponent<Rigidbody>().AddForce((float)rand.NextDouble() * 10, 40, 0);
         NetworkServer.Spawn(ball);
     }
+
+    private Vector3[] starts = new Vector3[]
+    {
+        new Vector3(-2,0.5f,0),
+        new Vector3(2,0.5f,0)
+    };
+
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         GameObject player;
@@ -39,6 +65,22 @@ public class MyNetworkManager : NetworkManager
         {
             InstantiateBall();
         }
+
+        //var playerCount = NetworkServer.connections.Count;
+        //if (playerCount <= starts.Length)
+        //{
+        //    if (playerCount == 2)
+        //    {
+        //        InstantiateBall();
+        //    }
+        //    var player = Instantiate(playerPrefab, starts[playerCount-1], Quaternion.identity) as GameObject;
+        //    NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
+        //    players.Add(player.GetComponent<PlayerController>());
+        //}
+        //else
+        //{
+        //    conn.Disconnect();
+        //}
     }
 
     

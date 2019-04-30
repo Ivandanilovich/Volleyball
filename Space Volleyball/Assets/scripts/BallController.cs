@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BallController : NetworkBehaviour
@@ -14,6 +15,8 @@ public class BallController : NetworkBehaviour
     {
         rBall = GetComponent<Rigidbody>();
     }
+
+    
 
     void FixedUpdate()
     {
@@ -30,6 +33,9 @@ public class BallController : NetworkBehaviour
                     MyNetworkManager.Instance.players[1].Points++;
                 }
             }
+           
+                
+            
             rBall.velocity = new Vector3(0, 0, 0);
             rBall.transform.position = new Vector3(0, 3, 0);
             rBall.AddForce((float)rand.NextDouble() * 20 * rand.Next(2)-1.5f, 15, 0);
